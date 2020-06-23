@@ -12,7 +12,7 @@
             "localRoot": "${workspaceRoot}",
             "commandLine": "-workdir ${workspaceRoot}/../ -file src/main.lua",
             "port": 7003,
-            "exePath": "E:/Software/Cocos/Cocos2d-x/cocos2d-x-3.10/build/Debug.win32/lua-tests/lua-tests.exe",
+            "exePath": "F:/qqbot/Cocos2dx-luatest/lua-tests/lua-tests.exe",
             "fileExtNames": [
                 ".lua",
                 ".txt",

@@ -1,5 +1,6 @@
-local function AccelerometerMainLayer()
+local _AccelerometerMainLayer = class("_AccelerometerMainLayer")
 
+function _AccelerometerMainLayer:AccelerometerMainLayer()
     local function title()
       return "AccelerometerTest"
     end
@@ -59,15 +60,25 @@ local function AccelerometerMainLayer()
     end
 
     layer:registerScriptHandler(onNodeEvent)
-    
     return layer
 end
 
-
-function AccelerometerMain()
-	cclog("AccelerometerMain")
-	local scene = cc.Scene:create()
-	scene:addChild(AccelerometerMainLayer())
+function _AccelerometerMainLayer:reloadMain()
+    cclog("AccelerometerMain")
+    local scene = cc.Scene:create()
+    scene:addChild(self:AccelerometerMainLayer())
 	scene:addChild(CreateBackMenuItem())
 	return scene
 end
+
+function AccelerometerMain()
+	cclog("AccelerometerMain")
+    local scene = cc.Scene:create()
+    --@RefType[AccelerometerTest.AccelerometerTest#AccelerometerTest]
+    local AccelerometerTest = require("AccelerometerTest/AccelerometerTest")
+	scene:addChild(AccelerometerTest:AccelerometerMainLayer())
+	scene:addChild(CreateBackMenuItem())
+	return scene
+end
+
+return _AccelerometerMainLayer

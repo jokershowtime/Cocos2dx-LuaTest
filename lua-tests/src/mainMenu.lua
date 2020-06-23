@@ -1,71 +1,80 @@
-require "helper"
-require "testResource"
-require "VisibleRect"
+local requireName = {
+    "helper",
+    "testResource",
+    "VisibleRect",
 
-require "AccelerometerTest/AccelerometerTest"
-require "ActionManagerTest/ActionManagerTest"
-require "ActionsEaseTest/ActionsEaseTest"
-require "ActionsProgressTest/ActionsProgressTest"
-require "ActionsTest/ActionsTest"
-require "AssetsManagerTest/AssetsManagerTest"
-require "AssetsManagerExTest/AssetsManagerExTest"
-require "BillBoardTest/BillBoardTest"
-require "BugsTest/BugsTest"
-require "ByteCodeEncryptTest/ByteCodeEncryptTest"
-require "Camera3DTest/Camera3DTest"
-require "ClickAndMoveTest/ClickAndMoveTest"
-require "CocosDenshionTest/CocosDenshionTest"
-require "CocoStudioTest/CocoStudioTest"
-require "ComponentTest/main"
-require "CurrentLanguageTest/CurrentLanguageTest"
-require "DrawPrimitivesTest/DrawPrimitivesTest"
-require "EffectsTest/EffectsTest"
-require "EffectsAdvancedTest/EffectsAdvancedTest"
-require "ExtensionTest/ExtensionTest"
-require "FontTest/FontTest"
-require "IntervalTest/IntervalTest"
-require "KeypadTest/KeypadTest"
-require "LabelTest/LabelTest"
-require "LabelTestNew/LabelTestNew"
-require "LayerTest/LayerTest"
-require "LightTest/LightTest"
-require "MenuTest/MenuTest"
-require "MotionStreakTest/MotionStreakTest"
-require "NewEventDispatcherTest/NewEventDispatcherTest"
-require "NodeTest/NodeTest"
-require "OpenGLTest/OpenGLTest"
-require "ParallaxTest/ParallaxTest"
-require "ParticleTest/ParticleTest"
-require "Particle3DTest/Particle3DTest"
-require "RenderTextureTest/RenderTextureTest"
-require "RotateWorldTest/RotateWorldTest"
-require "Sprite3DTest/Sprite3DTest"
-require "SpriteTest/SpriteTest"
-require "SceneTest/SceneTest"
-require "SpineTest/SpineTest"
-require "TerrainTest/TerrainTest"
-require "TextInputTest/TextInputTest"
-require "Texture2dTest/Texture2dTest"
-require "TileMapTest/TileMapTest"
-require "TouchesTest/TouchesTest"
-require "TransitionsTest/TransitionsTest"
-require "UserDefaultTest/UserDefaultTest"
-require "VibrateTest/VibrateTest"
-require "ZwoptexTest/ZwoptexTest"
-require "LuaBridgeTest/LuaBridgeTest"
-require "XMLHttpRequestTest/XMLHttpRequestTest"
-require "PhysicsTest/PhysicsTest"
-require "CaptureScreenTest/CaptureScreenTest"
-require "VideoPlayerTest/VideoPlayerTest"
-require "FastTiledMapTest/FastTiledMapTest"
-require "NewAudioEngineTest/NewAudioEngineTest"
-require "CocosStudio3DTest/CocosStudio3DTest"
-require "WebViewTest/WebViewTest"
-require "SpritePolygonTest/SpritePolygonTest"
-require "Physics3DTest/Physics3DTest"
-require "Scene3DTest/Scene3DTest"
-require "MaterialSystemTest/MaterialSystemTest"
-require "NavMeshTest/NavMeshTest"
+    "AccelerometerTest/AccelerometerTest",
+    "ActionManagerTest/ActionManagerTest",
+    "ActionsEaseTest/ActionsEaseTest",
+    "ActionsProgressTest/ActionsProgressTest",
+    "ActionsTest/ActionsTest",
+    "AssetsManagerTest/AssetsManagerTest",
+    "AssetsManagerExTest/AssetsManagerExTest",
+    "BillBoardTest/BillBoardTest",
+    "BugsTest/BugsTest",
+    "ByteCodeEncryptTest/ByteCodeEncryptTest",
+    "Camera3DTest/Camera3DTest",
+    "ClickAndMoveTest/ClickAndMoveTest",
+    "CocosDenshionTest/CocosDenshionTest",
+    "CocoStudioTest/CocoStudioTest",
+    "ComponentTest/main",
+    "CurrentLanguageTest/CurrentLanguageTest",
+    "DrawPrimitivesTest/DrawPrimitivesTest",
+    "EffectsTest/EffectsTest",
+    "EffectsAdvancedTest/EffectsAdvancedTest",
+    "ExtensionTest/ExtensionTest",
+    "FontTest/FontTest",
+    "IntervalTest/IntervalTest",
+    "KeypadTest/KeypadTest",
+    "LabelTest/LabelTest",
+    "LabelTestNew/LabelTestNew",
+    "LayerTest/LayerTest",
+    "LightTest/LightTest",
+    "MenuTest/MenuTest",
+    "MotionStreakTest/MotionStreakTest",
+    "NewEventDispatcherTest/NewEventDispatcherTest",
+    "NodeTest/NodeTest",
+    "OpenGLTest/OpenGLTest",
+    "ParallaxTest/ParallaxTest",
+    "ParticleTest/ParticleTest",
+    "Particle3DTest/Particle3DTest",
+    "RenderTextureTest/RenderTextureTest",
+    "RotateWorldTest/RotateWorldTest",
+    "Sprite3DTest/Sprite3DTest",
+    "SpriteTest/SpriteTest",
+    "SceneTest/SceneTest",
+    "SpineTest/SpineTest",
+    "TerrainTest/TerrainTest",
+    "TextInputTest/TextInputTest",
+    "Texture2dTest/Texture2dTest",
+    "TileMapTest/TileMapTest",
+    "TouchesTest/TouchesTest",
+    "TransitionsTest/TransitionsTest",
+    "UserDefaultTest/UserDefaultTest",
+    "VibrateTest/VibrateTest",
+    "ZwoptexTest/ZwoptexTest",
+    "LuaBridgeTest/LuaBridgeTest",
+    "XMLHttpRequestTest/XMLHttpRequestTest",
+    "PhysicsTest/PhysicsTest",
+    "CaptureScreenTest/CaptureScreenTest",
+    "VideoPlayerTest/VideoPlayerTest",
+    "FastTiledMapTest/FastTiledMapTest",
+    "NewAudioEngineTest/NewAudioEngineTest",
+    "CocosStudio3DTest/CocosStudio3DTest",
+    "WebViewTest/WebViewTest",
+    "SpritePolygonTest/SpritePolygonTest",
+    "Physics3DTest/Physics3DTest",
+    "Scene3DTest/Scene3DTest",
+    "MaterialSystemTest/MaterialSystemTest",
+    "NavMeshTest/NavMeshTest",
+}
+
+local oldRequireModle = {}
+local requireModle = {}
+for _, _path in pairs(requireName) do
+    oldRequireModle[_path] = require(_path)
+end
+
 
 local LINE_SPACE = 40
 
@@ -79,86 +88,101 @@ if (cc.PLATFORM_OS_WINDOWS == currPlatform or cc.PLATFORM_OS_MAC == currPlatform
 end
 
 local _allTests = {
-    { isSupported = true,  name = "Accelerometer"          , create_func=             AccelerometerMain  },
-    { isSupported = true,  name = "ActionManagerTest"      , create_func   =         ActionManagerTestMain  },
-    { isSupported = true,  name = "ActionsEaseTest"        , create_func   =           EaseActionsTest      },
-    { isSupported = true,  name = "ActionsProgressTest"    , create_func   =       ProgressActionsTest      },
-    { isSupported = true,  name = "ActionsTest"            , create_func   =               ActionsTest      },
-    { isSupported = true,  name = "AssetsManagerTest"      , create_func   =         AssetsManagerTestMain      },
-    { isSupported = true,  name = "AssetsManagerExTest"      , create_func   =         AssetsManagerExTestMain  },
-    { isSupported = audioEndineSupported, name = "AudioEngineTest", create_func = AudioEngineTest},
-    { isSupported = false,  name = "Box2dTest"              , create_func=                 Box2dTestMain  },
-    { isSupported = false,  name = "Box2dTestBed"           , create_func=              Box2dTestBedMain  },
-    { isSupported = true,  name = "BillBoardTest"           , create_func=              BillBoardTestMain},
-    { isSupported = true,  name = "BugsTest"               , create_func=              BugsTestMain      },
-    { isSupported = true,  name = "ByteCodeEncryptTest"     , create_func=       ByteCodeEncryptTestMain  },
-    { isSupported = true,  name = "Camera3DTest"     ,        create_func=       Camera3DTestMain  },
-    { isSupported = true,  name = "CaptureScreenTest"       , create_func   =         CaptureScreenTestMain  },
-    { isSupported = false,  name = "ChipmunkAccelTouchTest" , create_func=    ChipmunkAccelTouchTestMain  },
-    { isSupported = true,  name = "ClickAndMoveTest"       , create_func   =          ClickAndMoveTest      },
-    { isSupported = true,  name = "CocosDenshionTest"      , create_func   =         CocosDenshionTestMain  },
-    { isSupported = true,  name = "CocosStudio3DTest"      , create_func   =               CocosStudio3DTest},
-    { isSupported = true,  name = "CocoStudioTest"         , create_func   =         CocoStudioTestMain  },
-    { isSupported = true,  name = "ComponentTest"          , create_func   =         ComponentTestMain  },
-    { isSupported = false,  name = "CurlTest"               , create_func=                  CurlTestMain  },
-    { isSupported = true,  name = "CurrentLanguageTest"    , create_func=   CurrentLanguageTestMain      },
-    { isSupported = true,  name = "DrawPrimitivesTest"     , create_func=        DrawPrimitivesTest      },
-    { isSupported = true,  name = "EffectsTest"            , create_func   =               EffectsTest      },
-    { isSupported = true,  name = "EffectAdvancedTest"     , create_func   =        EffectAdvancedTestMain  },
-    { isSupported = true,  name = "ExtensionsTest"         , create_func=        ExtensionsTestMain      },
-    { isSupported = true,  name = "FastTiledMapTest"       , create_func   =              FastTiledMapTestMain},
-    { isSupported = true,  name = "FontTest"               , create_func   =              FontTestMain      },
-    { isSupported = true,  name = "IntervalTest"           , create_func   =              IntervalTestMain  },
-    { isSupported = true,  name = "KeypadTest"             , create_func=                KeypadTestMain  }, 
-    { isSupported = true,  name = "LabelTest"              , create_func   =                 LabelTest      },
-    { isSupported = true,  name = "LabelTestNew"           , create_func   =                 LabelTestNew      },
-    { isSupported = true,  name = "LayerTest"              , create_func   =                 LayerTestMain  },
-    { isSupported = true,  name = "LightTest"          , create_func   =                 LightTestMain  },
-    { isSupported = true,  name = "LuaBridgeTest"          , create_func   =        LuaBridgeMainTest },
-    { isSupported = true,  name = "MaterialSystemTest"     , create_func   =        MaterialSystemTest },
-    { isSupported = true,  name = "MenuTest"               , create_func   =                  MenuTestMain  }, 
-    { isSupported = true,  name = "MotionStreakTest"       , create_func   =          MotionStreakTest      },
-    { isSupported = false,  name = "MutiTouchTest"          , create_func=          MutiTouchTestMain     },
-    { isSupported = true,  name = "NavMeshTest"            , create_func   =       NavMeshTest },
-    { isSupported = true,  name = "NewEventDispatcherTest"  , create_func   =       NewEventDispatcherTest },
-    { isSupported = true,  name = "NodeTest"               , create_func   =                  CocosNodeTest },
-    { isSupported = true,   name = "OpenGLTest"             , create_func=          OpenGLTestMain     },
-    { isSupported = true,  name = "ParallaxTest"           , create_func   =              ParallaxTestMain  },
-    { isSupported = true,  name = "ParticleTest"           , create_func   =              ParticleTest      }, 
-    { isSupported = true,  name = "Particle3D (PU)"        , create_func   =              Particle3DTest  },
-    { isSupported = true,  name = "PhysicsTest"            , create_func =          PhysicsTest  },
-    { isSupported = true,  name = "Physics3DTest"            , create_func =          Physics3DTest  },
-    { isSupported = true,  name = "RenderTextureTest"      , create_func   =         RenderTextureTestMain  },
-    { isSupported = true,  name = "RotateWorldTest"        , create_func   =           RotateWorldTest      },
-    { isSupported = true,  name = "SceneTest"              , create_func   =                 SceneTestMain  },
-    { isSupported = true,  name = "Scene3DTest"             , create_func=            Scene3DTestMain      },
-    { isSupported = true,  name = "SpineTest"              , create_func   =                 SpineTestMain  },
-    { isSupported = false,  name = "SchdulerTest"           , create_func=              SchdulerTestMain  },
-    { isSupported = false, name = "ShaderTest"             , create_func=            ShaderTestMain      },
-    { isSupported = true,  name = "Sprite3DTest"           , create_func   =                Sprite3DTest    },
-    { isSupported = true,  name = "TerrainTest"           , create_func   =                TerrainTest  },
-    { isSupported = true,  name = "SpriteTest"             , create_func   =                SpriteTest      },
-    { isSupported = true,  name = "SpritePolygonTest"             , create_func   =         SpritePolygonTest      },
-    { isSupported = true,  name = "TextInputTest"          , create_func=             TextInputTestMain  },
-    { isSupported = true,  name = "Texture2DTest"          , create_func   =             Texture2dTestMain  },
-    { isSupported = false,  name = "TextureCacheTest"       , create_func=      TextureCacheTestMain      },
-    { isSupported = true,  name = "TileMapTest"            , create_func   =               TileMapTestMain  }, 
-    { isSupported = true,  name = "TouchesTest"            , create_func   =               TouchesTest      },
-    { isSupported = true,  name = "TransitionsTest"        , create_func   =           TransitionsTest      },   
-    { isSupported = true,  name = "UserDefaultTest"        , create_func=           UserDefaultTestMain  },
-    { isSupported = true,  name = "VideoPlayerTest"        , create_func=           VideoPlayerTestMain  },
-    { isSupported = true,  name = "WebViewTest"            , create_func=           WebViewTestMain  },
-    { isSupported = true,  name = "XMLHttpRequestTest"     , create_func   =        XMLHttpRequestTestMain  },
-    { isSupported = true,  name = "VibrateTest"            , create_func   =               VibrateTestMain  },
-    { isSupported = true,  name = "ZwoptexTest"            , create_func   =               ZwoptexTestMain  }
+    { isSupported = true,  name = "Accelerometer"          , create_func=             AccelerometerMain  , reloadPath = "AccelerometerTest/AccelerometerTest"},
+    { isSupported = true,  name = "ActionManagerTest"      , create_func   =         ActionManagerTestMain  , reloadPath = "ActionManagerTest/ActionManagerTest"},
+    { isSupported = true,  name = "ActionsEaseTest"        , create_func   =           EaseActionsTest      , reloadPath = "ActionsEaseTest/ActionsEaseTest"},
+    { isSupported = true,  name = "ActionsProgressTest"    , create_func   =       ProgressActionsTest      , reloadPath = "ActionsProgressTest/ActionsProgressTest"},
+    { isSupported = true,  name = "ActionsTest"            , create_func   =               ActionsTest      , reloadPath = "ActionsTest/ActionsTest"},
+    { isSupported = true,  name = "AssetsManagerTest"      , create_func   =         AssetsManagerTestMain      , reloadPath = "AssetsManagerTest/AssetsManagerTest"},
+    { isSupported = true,  name = "AssetsManagerExTest"      , create_func   =         AssetsManagerExTestMain  , reloadPath = "AssetsManagerExTest/AssetsManagerExTest"},
+    { isSupported = audioEndineSupported, name = "AudioEngineTest", create_func = AudioEngineTest, reloadPath = nil},
+    { isSupported = false,  name = "Box2dTest"              , create_func=                 Box2dTestMain  , reloadPath = nil},
+    { isSupported = false,  name = "Box2dTestBed"           , create_func=              Box2dTestBedMain  , reloadPath = nil},
+    { isSupported = true,  name = "BillBoardTest"           , create_func=              BillBoardTestMain, reloadPath = "BillBoardTest/BillBoardTest"},
+    { isSupported = true,  name = "BugsTest"               , create_func=              BugsTestMain      , reloadPath = "BugsTest/BugsTest"},
+    { isSupported = true,  name = "ByteCodeEncryptTest"     , create_func=       ByteCodeEncryptTestMain  , reloadPath = "ByteCodeEncryptTest/ByteCodeEncryptTest"},
+    { isSupported = true,  name = "Camera3DTest"     ,        create_func=       Camera3DTestMain  , reloadPath = "Camera3DTest/Camera3DTest"},
+    { isSupported = true,  name = "CaptureScreenTest"       , create_func   =         CaptureScreenTestMain  , reloadPath = "CaptureScreenTest/CaptureScreenTest"},
+    { isSupported = false,  name = "ChipmunkAccelTouchTest" , create_func=    ChipmunkAccelTouchTestMain  , reloadPath = nil},
+    { isSupported = true,  name = "ClickAndMoveTest"       , create_func   =          ClickAndMoveTest      , reloadPath = "ClickAndMoveTest/ClickAndMoveTest"},
+    { isSupported = true,  name = "CocosDenshionTest"      , create_func   =         CocosDenshionTestMain  , reloadPath = "CocosDenshionTest/CocosDenshionTest"},
+    { isSupported = true,  name = "CocosStudio3DTest"      , create_func   =               CocosStudio3DTest, reloadPath = "CocosStudio3DTest/CocosStudio3DTest"},
+    { isSupported = true,  name = "CocoStudioTest"         , create_func   =         CocoStudioTestMain  , reloadPath = "CocoStudioTest/CocoStudioTest"},
+    { isSupported = true,  name = "ComponentTest"          , create_func   =         ComponentTestMain  , reloadPath = nil},
+    { isSupported = false,  name = "CurlTest"               , create_func=                  CurlTestMain  , reloadPath = nil},
+    { isSupported = true,  name = "CurrentLanguageTest"    , create_func=   CurrentLanguageTestMain      , reloadPath = "CurrentLanguageTest/CurrentLanguageTest"},
+    { isSupported = true,  name = "DrawPrimitivesTest"     , create_func=        DrawPrimitivesTest      , reloadPath = "DrawPrimitivesTest/DrawPrimitivesTest"},
+    { isSupported = true,  name = "EffectsTest"            , create_func   =               EffectsTest      , reloadPath = "EffectsTest/EffectsTest"},
+    { isSupported = true,  name = "EffectAdvancedTest"     , create_func   =        EffectAdvancedTestMain  , reloadPath = "EffectsAdvancedTest/EffectsAdvancedTest"},
+    { isSupported = true,  name = "ExtensionsTest"         , create_func=        ExtensionsTestMain      , reloadPath = "ExtensionTest/ExtensionTest"},
+    { isSupported = true,  name = "FastTiledMapTest"       , create_func   =              FastTiledMapTestMain, reloadPath = "FastTiledMapTest/FastTiledMapTest"},
+    { isSupported = true,  name = "FontTest"               , create_func   =              FontTestMain      , reloadPath = "FontTest/FontTest"},
+    { isSupported = true,  name = "IntervalTest"           , create_func   =              IntervalTestMain  , reloadPath = "IntervalTest/IntervalTest"},
+    { isSupported = true,  name = "KeypadTest"             , create_func=                KeypadTestMain  , reloadPath = "KeypadTest/KeypadTest"}, 
+    { isSupported = true,  name = "LabelTest"              , create_func   =                 LabelTest      , reloadPath = "LabelTest/LabelTest"},
+    { isSupported = true,  name = "LabelTestNew"           , create_func   =                 LabelTestNew      , reloadPath = "LabelTestNew/LabelTestNew"},
+    { isSupported = true,  name = "LayerTest"              , create_func   =                 LayerTestMain  , reloadPath = "LayerTest/LayerTest"},
+    { isSupported = true,  name = "LightTest"          , create_func   =                 LightTestMain  , reloadPath = "LightTest/LightTest"},
+    { isSupported = true,  name = "LuaBridgeTest"          , create_func   =        LuaBridgeMainTest , reloadPath = "LuaBridgeTest/LuaBridgeTest"},
+    { isSupported = true,  name = "MaterialSystemTest"     , create_func   =        MaterialSystemTest , reloadPath = "MaterialSystemTest/MaterialSystemTest"},
+    { isSupported = true,  name = "MenuTest"               , create_func   =                  MenuTestMain  , reloadPath = "MenuTest/MenuTest"}, 
+    { isSupported = true,  name = "MotionStreakTest"       , create_func   =          MotionStreakTest      , reloadPath = "MotionStreakTest/MotionStreakTest"},
+    { isSupported = false,  name = "MutiTouchTest"          , create_func=          MutiTouchTestMain     , reloadPath = nil},
+    { isSupported = true,  name = "NavMeshTest"            , create_func   =       NavMeshTest , reloadPath = "NavMeshTest/NavMeshTest"},
+    { isSupported = true,  name = "NewEventDispatcherTest"  , create_func   =       NewEventDispatcherTest , reloadPath = "NewEventDispatcherTest/NewEventDispatcherTest"},
+    { isSupported = true,  name = "NodeTest"               , create_func   =                  CocosNodeTest , reloadPath = "NodeTest/NodeTest"},
+    { isSupported = true,   name = "OpenGLTest"             , create_func=          OpenGLTestMain     , reloadPath = "OpenGLTest/OpenGLTest"},
+    { isSupported = true,  name = "ParallaxTest"           , create_func   =              ParallaxTestMain  , reloadPath = "ParallaxTest/ParallaxTest"},
+    { isSupported = true,  name = "ParticleTest"           , create_func   =              ParticleTest      , reloadPath = "ParticleTest/ParticleTest"}, 
+    { isSupported = true,  name = "Particle3D (PU)"        , create_func   =              Particle3DTest  , reloadPath = "Particle3DTest/Particle3DTest"},
+    { isSupported = true,  name = "PhysicsTest"            , create_func =          PhysicsTest  , reloadPath = "PhysicsTest/PhysicsTest"},
+    { isSupported = true,  name = "Physics3DTest"            , create_func =          Physics3DTest  , reloadPath = "Physics3DTest/Physics3DTest"},
+    { isSupported = true,  name = "RenderTextureTest"      , create_func   =         RenderTextureTestMain  , reloadPath = "RenderTextureTest/RenderTextureTest"},
+    { isSupported = true,  name = "RotateWorldTest"        , create_func   =           RotateWorldTest      , reloadPath = "RotateWorldTest/RotateWorldTest"},
+    { isSupported = true,  name = "SceneTest"              , create_func   =                 SceneTestMain  , reloadPath = "SceneTest/SceneTest"},
+    { isSupported = true,  name = "Scene3DTest"             , create_func=            Scene3DTestMain      , reloadPath = "Scene3DTest/Scene3DTest"},
+    { isSupported = true,  name = "SpineTest"              , create_func   =                 SpineTestMain  , reloadPath = "SpineTest/SpineTest"},
+    { isSupported = false,  name = "SchdulerTest"           , create_func=              SchdulerTestMain  , reloadPath = nil},
+    { isSupported = false, name = "ShaderTest"             , create_func=            ShaderTestMain      , reloadPath = nil},
+    { isSupported = true,  name = "Sprite3DTest"           , create_func   =                Sprite3DTest    , reloadPath = "Sprite3DTest/Sprite3DTest"},
+    { isSupported = true,  name = "TerrainTest"           , create_func   =                TerrainTest  , reloadPath = "TerrainTest/TerrainTest"},
+    { isSupported = true,  name = "SpriteTest"             , create_func   =                SpriteTest      , reloadPath = "SpriteTest/SpriteTest"},
+    { isSupported = true,  name = "SpritePolygonTest"             , create_func   =         SpritePolygonTest      , reloadPath = "SpritePolygonTest/SpritePolygonTest"},
+    { isSupported = true,  name = "TextInputTest"          , create_func=             TextInputTestMain  , reloadPath = "TextInputTest/TextInputTest"},
+    { isSupported = true,  name = "Texture2DTest"          , create_func   =             Texture2dTestMain  , reloadPath = "Texture2dTest/Texture2dTest"},
+    { isSupported = false,  name = "TextureCacheTest"       , create_func=      TextureCacheTestMain      , reloadPath = nil},
+    { isSupported = true,  name = "TileMapTest"            , create_func   =               TileMapTestMain  , reloadPath = "TileMapTest/TileMapTest"}, 
+    { isSupported = true,  name = "TouchesTest"            , create_func   =               TouchesTest      , reloadPath = "TouchesTest/TouchesTest"},
+    { isSupported = true,  name = "TransitionsTest"        , create_func   =           TransitionsTest      , reloadPath = "TransitionsTest/TransitionsTest"},   
+    { isSupported = true,  name = "UserDefaultTest"        , create_func=           UserDefaultTestMain  , reloadPath = "UserDefaultTest/UserDefaultTest"},
+    { isSupported = true,  name = "VideoPlayerTest"        , create_func=           VideoPlayerTestMain  , reloadPath = "VideoPlayerTest/VideoPlayerTest"},
+    { isSupported = true,  name = "WebViewTest"            , create_func=           WebViewTestMain  , reloadPath = "WebViewTest/WebViewTest"},
+    { isSupported = true,  name = "XMLHttpRequestTest"     , create_func   =        XMLHttpRequestTestMain  , reloadPath = "XMLHttpRequestTest/XMLHttpRequestTest"},
+    { isSupported = true,  name = "VibrateTest"            , create_func   =               VibrateTestMain  , reloadPath = "VibrateTest/VibrateTest"},
+    { isSupported = true,  name = "ZwoptexTest"            , create_func   =               ZwoptexTestMain  , reloadPath = "ZwoptexTest/ZwoptexTest"}
 }
+
+for _path, modle  in pairs(oldRequireModle) do
+    for __, data in pairs(_allTests) do
+        if _path == data.reloadPath then
+            requireModle[data.name] = modle
+            break
+        end
+    end
+end
 
 local TESTS_COUNT = table.getn(_allTests)
 
 -- create scene
 local function CreateTestScene(nIdx)
     cc.Director:getInstance():purgeCachedData()
-    local scene = _allTests[nIdx].create_func()
+    local name = _allTests[nIdx].name
+    local scene = nil
+    if requireModle[name] and "table" == type(requireModle[name]) and requireModle[name].reloadMain then
+        scene = requireModle[name]:reloadMain()
+    else    
+        scene = _allTests[nIdx].create_func()
+    end
     return scene
 end
 -- create menu
@@ -201,6 +225,9 @@ function CreateTestMenu()
         local testLabel = cc.Label:createWithTTF(obj.name, s_arialPath, 24)
         testLabel:setAnchorPoint(cc.p(0.5, 0.5))
         local testMenuItem = cc.MenuItemLabel:create(testLabel)
+        local reloadLabel = cc.Label:createWithTTF("reload", s_arialPath, 24)
+        reloadLabel:setAnchorPoint(cc.p(0, 0.5))
+        local reloadItem = cc.MenuItemLabel:create(reloadLabel)
         if not obj.isSupported then
             testMenuItem:setEnabled(false)
         end
@@ -228,6 +255,30 @@ function CreateTestMenu()
         testMenuItem:registerScriptTapHandler(menuCallback)
         testMenuItem:setPosition(cc.p(s.width / 2, (s.height - (index) * LINE_SPACE)))
         MainMenu:addChild(testMenuItem, index + 10000, index + 10000)
+
+        reloadItem:registerScriptTapHandler(function ()
+            local reloadPath = obj.reloadPath
+            local oldFile = nil
+            local oldModle = nil
+            if reloadPath and package.loaded[reloadPath] then
+                oldFile = package.loaded[reloadPath]
+                oldModle = requireModle[obj.name]
+                package.loaded[reloadPath] = nil
+                requireModle[obj.name] = nil
+                local ok, err = pcall(require, reloadPath)
+                if not ok then
+                    print("require failed")
+                    package.loaded[reloadPath] = oldFile
+                else
+                    requireModle[obj.name] = ok
+                    print("reload succeed")
+                end
+            else
+                print("reload failed")
+            end
+        end)
+        reloadItem:setPosition(cc.p(50, (s.height - (index) * LINE_SPACE)))
+        MainMenu:addChild(reloadItem, index + 20000, index + 20000)
     end
 
     MainMenu:setContentSize(cc.size(s.width, (TESTS_COUNT + 1) * (LINE_SPACE)))
@@ -270,3 +321,19 @@ function CreateTestMenu()
 
     return menuLayer
 end
+
+-- DEBUG. reload some lua, for fast edit ui
+if cc.Application:getInstance():getTargetPlatform() == cc.PLATFORM_OS_WINDOWS then 
+    local function callback(keycode, evt)
+        if keycode == cc.KeyCode.KEY_F5 then         -- F5 reload lua files
+            -- package.loaded[ "init/initReload" ] = nil
+            -- require( "init/initReload" )
+            print("123")
+        end
+    end
+  
+    local listener        = cc.EventListenerKeyboard:create()
+    local eventDispatcher = cc.Director:getInstance():getEventDispatcher()
+    listener:registerScriptHandler(callback, cc.Handler.EVENT_KEYBOARD_RELEASED)
+    eventDispatcher:addEventListenerWithFixedPriority(listener, 1)
+  end
